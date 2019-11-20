@@ -51,6 +51,48 @@
 
 
 var filterFamilyMembers = function (familyTree, truthTest) {
-  // All your code in this function body
+
+		// stopping condition if familyTree.children is undefined or equal empty array loop through the array and call the function again
+		//apply the thruth test
+
+	var acc = [];
+
+
+	if (familyTree.children === undefined && familyTree.children === []) {
+
+		if (truthTest(familyTree) === true){
+
+			acc.push(familyTree.firstName + " " + familyTree.lastName);
+
+		}
+
+		return acc
+
+	}
+
+
+	for (var i = 0; i < familyTree.children.length; i++) {
+
+		if (typeof familyTree.children[i] == "object"){
+
+			filterFamilyMembers(familyTree.children[i], truthTest);
+
+		}
+
+
+		if (truthTest(familyTree.children[i])){
+			acc.push(familyTree.children[i].firstName + " " + familyTree.children[i].lastName)
+		}
+	}
+
+
+	return acc;
+
+
 };
+
+
+
+
+
 
